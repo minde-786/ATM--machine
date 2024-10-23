@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import inquirer from "inquirer";
 let totalMoney = 10000;
 let pinNo = 4444;
@@ -35,17 +36,21 @@ if (input.num1 == pinNo) {
     }
     else if (input1.num2 == "balance transfer") {
         let ans1 = await inquirer.prompt([{
-                name: "num1",
-                type: "number",
-                message: "enter transfer number"
+                name: "num",
+                type: "list",
+                choices: ["easypaisa", "banktransfer", "jazzchase", "u paisa"],
+                message: "enter number to transfer"
             },
+            { name: "num1",
+                type: "number",
+                message: "enter number to transfer" },
             { name: "num2",
                 type: "number",
                 message: "enter amount"
             }]);
         if (totalMoney > ans1.num2)
             totalMoney -= ans1.num2,
-                console.log("your remaining balance is", +totalMoney);
+                console.log("trasfer compeleted !your remaining balance is", +totalMoney);
         else if (totalMoney < ans1.num2) {
             console.log("insufficiant balance");
         }
